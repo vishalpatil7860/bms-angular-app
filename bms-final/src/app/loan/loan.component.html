@@ -1,0 +1,168 @@
+<h1>Apply for a Loan Now!</h1>
+
+
+<section class="loan-form">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        
+        
+        <mat-form-field appearance="">
+            <mat-label>Loan Type</mat-label>
+            <mat-select [formControl]="loanType" [(ngModel)]="selectedLoanType" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let loan of loans" [value]="loan.type" >
+                    {{loan.type}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="loanType.hasError('required')">Please choose a Loan Type</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <input type="number" matInput placeholder="Loan Amount" min="0" ngModel name="loanAmount"  required #loanAmountInput="ngModel">            
+        </mat-form-field>
+        
+        <mat-form-field>
+            <input matInput placeholder="Loan Apply Date" [matDatepicker]="picker" [min]="minApplyDate" [max]="maxApplyDate" ngModel name="loanApplyDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <input matInput placeholder="Loan Issue Date" [matDatepicker]="regpicker" [min]="minIssueDate" [max]="maxIssueDate" ngModel name="regDate" required>
+            <mat-datepicker-toggle matSuffix [for]="regpicker"></mat-datepicker-toggle>
+            <mat-datepicker #regpicker></mat-datepicker>
+        </mat-form-field>
+        
+        
+        <mat-form-field>
+            <input type="number" matInput placeholder="Rate Of Interest" ngModel name="rateOfInterest"  required #rateOfInterestInput="ngModel">            
+        </mat-form-field>
+        
+        <mat-form-field appearance="">
+            <mat-label>Loan Duration (Years)</mat-label>
+            <mat-select [formControl]="loanDuration" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let duration of durations" [value]="duration" >
+                    {{duration.type}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="loanDuration.hasError('required')">Please choose a Duration</mat-error>
+        </mat-form-field>
+        
+        
+        
+        <!-- ________________________________________________________________________________________________________________________ -->
+        <section class="loan-form" *ngIf="selectedLoanType === 'Education'">
+            <div id="education" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <br>
+                <h2>Education Loan</h2>
+                <br>
+
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Course Fees" min="0" ngModel name="courseFees"  required #courseFeesInput="ngModel">            
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Course Name" ngModel name="courseName"  required #courseNameInput="ngModel">            
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Father's Name" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$" ngModel name="fatherName"  required #fatherNameInput="ngModel">            
+                    <mat-error>Enter Valid Name!</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Father's Occupation" ngModel name="fatherOccupation"  required #fatherOccupationInput="ngModel">            
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Father's Total Experience (Years)" ngModel name="fatherTotalExperience"  required #fatherTotalExperienceInput="ngModel">            
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Father's Experience With Current Company (Years)" ngModel name="fatherCurrentExperience"  required #fatherCurrentExperienceInput="ngModel">            
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Ration Card Number" ngModel name="rationCardNumber"  required #rationCardNumberInput="ngModel">            
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Annual Income" ngModel name="annualIncome"  required #annualIncomeInput="ngModel">            
+                </mat-form-field>
+
+            </div>
+        </section>
+        
+        <!-- ________________________________________________________________________________________________________________________ -->
+        <!-- ________________________________________________________________________________________________________________________ -->
+        <section class="loan-form" *ngIf="selectedLoanType === 'Personal'">
+            <div id="personalOrHome" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <br>
+                <h2>Personal Loan</h2>
+               
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Annual Income" ngModel name="annualIncome"  required #annualIncomeInput="ngModel">            
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Company Name" ngModel name="companyName"  required #companyNameInput="ngModel">            
+                </mat-form-field>
+
+                
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Designation" ngModel name="designation"  required #designationInput="ngModel">            
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Total Experience (Years)" ngModel name="totalExperience"  required #totalExperienceInput="ngModel">            
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Experience With Current Company (Years)" ngModel name="currentExperience"  required #currentExperienceInput="ngModel">            
+                </mat-form-field>
+
+            </div>
+        </section>
+        
+        <!-- ________________________________________________________________________________________________________________________ -->
+        
+        <section class="loan-form" *ngIf="selectedLoanType === 'Home'">
+            <div id="education" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <br>
+                <h2>Home Loan</h2><br>
+                
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Annual Income" ngModel name="annualIncome"  required #annualIncomeInput="ngModel">            
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Company Name" ngModel name="companyName"  required #companyNameInput="ngModel">            
+                </mat-form-field>
+
+                
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Designation" ngModel name="designation"  required #designationInput="ngModel">            
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Total Experience (Years)" ngModel name="totalExperience"  required #totalExperienceInput="ngModel">            
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="number" matInput placeholder="Experience With Current Company (Years)" ngModel name="currentExperience"  required #currentExperienceInput="ngModel">            
+                </mat-form-field>
+            </div>
+        </section>
+        
+        
+        
+        
+        <button type="submit" class="button" (click)="updateDetails()" mat-raised-button color="primary" >Apply for Loan</button>
+    </form>
+</section>
+
+<section id="container">    
+    <div id="child1" class="child"></div>
+    <div id="child2" class="child"></div>
+    <div id="child3" class="child"></div>
+</section>

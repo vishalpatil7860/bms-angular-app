@@ -1,0 +1,164 @@
+<section class="signup-form">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+       
+       <h2>Update Details</h2>
+        <br><br>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Your Name" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$" ngModel name="fullname"  required #fullnameInput="ngModel">            
+            <mat-error>Enter Valid Name!</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="">
+            <mat-label>Guardian Type</mat-label>
+            <mat-select [formControl]="guardianType" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let guardian of guardians" [value]="guardian" >
+                    {{guardian.type}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="guardianType.hasError('required')">Please choose a Guardian</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <input type="text" matInput value="Vishal" placeholder="Guardian Name" ngModel name="guardianName"  required #guardianNameInput="ngModel">            
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="text" matInput placeholder="Address" ngModel name="address"  required #addressInput="ngModel">            
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="text" matInput placeholder="Citizenship" ngModel name="citizenship"  required #citizenshipInput="ngModel">            
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="text" matInput placeholder="Country" ngModel name="country"  required #countryInput="ngModel">            
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="text" matInput placeholder="State" ngModel name="state"  required #stateInput="ngModel">            
+        </mat-form-field>
+
+
+        <mat-form-field appearance="">
+            <mat-label>Gender</mat-label>
+            <mat-select [formControl]="genderType" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let gender of genders" [value]="gender" >
+                    {{gender.type}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="genderType.hasError('required')">Please choose a Gender</mat-error>
+        </mat-form-field>
+        
+
+        <mat-form-field appearance="">
+            <mat-label>Marital Status</mat-label>
+            <mat-select [formControl]="maritalStatusType" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let maritalStatus of maritalStatuses" [value]="maritalStatus" >
+                    {{maritalStatus.type}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="maritalStatusType.hasError('required')">Please choose a Marital Status</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="tel" matInput placeholder="Contact Number" ngModel name="contact" maxlength="10"  required #contactNumberInput="ngModel">            
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Enter DOB" [matDatepicker]="picker" [min]="minDate" [max]="maxDate" ngModel name="birthDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-hint>Only People with age between 18-96 years</mat-hint>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <input matInput placeholder="Registration Date" [matDatepicker]="regpicker" [min]="minRegDate" [max]="maxRegDate" ngModel name="regDate" required>
+            <mat-datepicker-toggle matSuffix [for]="regpicker"></mat-datepicker-toggle>
+            <mat-datepicker #regpicker></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field appearance="">
+            <mat-label>Account Type</mat-label>
+            <mat-select [formControl]="accountType" [(ngModel)]="selectedAccountType" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let account of accounts" [value]="account.type" >
+                    {{account.type}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="accountType.hasError('required')">Please choose an Account Type</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Branch Name" ngModel name="branchName" required #branchNameInput="ngModel">            
+        </mat-form-field>
+
+
+        <mat-form-field appearance="">
+            <mat-label>Citizen Type</mat-label>
+            <mat-select [formControl]="citizenType" [(ngModel)]="selectedCitizenType" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let citizen of citizens" [value]="citizen" >
+                    {{citizen.type}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="citizenType.hasError('required')">Please choose Citizen type</mat-error>
+        </mat-form-field>
+
+
+        <!-- <mat-form-field>
+            <input type="number" matInput placeholder="Initial Deposit Amount"  name="initialDepositAmount"  required #initialDepositAmountInput="">
+        </mat-form-field> -->
+
+        <mat-form-field *ngIf="selectedAccountType === 'Savings'">   
+            <input type="number" matInput value="5000" placeholder="Initial Deposit Amount"  name="initialDepositAmount"  required #initialDepositAmountInput="">
+        </mat-form-field>
+        <mat-form-field *ngIf="selectedAccountType === 'Salary'">           
+            <input type="number" value="0" matInput placeholder="Initial Deposit Amount"  name="initialDepositAmount"  required #initialDepositAmountInput="">            
+        </mat-form-field>
+
+
+        <mat-form-field appearance="">
+            <mat-label>Identification Proof Type</mat-label>
+            <mat-select [formControl]="idType" [(ngModel)]="selectedIdType" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let id of ids" [value]="id.type">
+                    {{id.type}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="idType.hasError('required')">Please choose ID type</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field  *ngIf="selectedIdType">
+            <input type="text" matInput placeholder="PAN Number" ngModel name="idNumber" maxlength="12" minlength="12" pattern="^[A-Za-z]{5}[0-9]{6}[A-Za-z]$"
+             required #panInput1="ngModel" > 
+             <mat-error>Valid PAN Format: ABCDE123456A</mat-error>    
+            <!-- <input type="number" matInput placeholder="Aadhaar Number" ngModel name="idNumber"  required #idNumberInput2="ngModel">             -->
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="text" matInput placeholder="Reference Account Holder Name" ngModel name="nomineeName"  required #nomineeNameInput="ngModel">            
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="number" matInput placeholder="Reference Account Holder Account Number" ngModel name="nomineeAccountNumber"  required #nomineeAccountNumberInput="ngModel">            
+        </mat-form-field>
+
+        <mat-form-field>
+            <input type="text" matInput placeholder="Reference Account Holder Address" ngModel name="nomineeAddress"  required #nomineeAddressInput="ngModel">            
+        </mat-form-field>
+
+
+
+
+
+        <button class="button" type="submit" mat-raised-button color="primary" >Update Details</button>
+    </form>
+</section>
+
+<section id="container">    
+    <div id="child1" class="child"></div>
+    <div id="child2" class="child"></div>
+    <div id="child3" class="child"></div>
+</section>
